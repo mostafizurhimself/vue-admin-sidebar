@@ -105,7 +105,7 @@ menu [
         /*
         badge: {
             text: 'new',
-            class: 'vsm--badge_default'
+            class: 'vas--badge_default'
             // attributes: {}
             // element: 'span'
         }
@@ -239,28 +239,28 @@ All styles customization can be done in normal CSS by using this classes
 
 ```css
 .v-sidebar-menu {}
-.v-sidebar-menu.vsm_expanded {}
-.v-sidebar-menu.vsm_collapsed {}
-.v-sidebar-menu.vsm_rtl {}
-.v-sidebar-menu .vsm--item {}
-.v-sidebar-menu .vsm--item.vsm--item_open {}
-.v-sidebar-menu .vsm--link {}
-.v-sidebar-menu .vsm--link.vsm--link_active {}
-.v-sidebar-menu .vsm--link.vsm--link_exact-active {}
-.v-sidebar-menu .vsm--link.vsm--link_mobile-item {}
-.v-sidebar-menu .vsm--link.vsm--link_level-[n] {}
-.v-sidebar-menu .vsm--link.vsm--link_disabled {}
-.v-sidebar-menu .vsm--title {}
-.v-sidebar-menu .vsm--icon {}
-.v-sidebar-menu .vsm--arrow {}
-.v-sidebar-menu .vsm--arrow.vsm--arrow_open {}
-.v-sidebar-menu .vsm--badge {}
-.v-sidebar-menu .vsm--header {}
-.v-sidebar-menu .vsm--list {}
-.v-sidebar-menu .vsm--dropdown>.vsm--list {}
-.v-sidebar-menu .vsm--mobile-item {}
-.v-sidebar-menu .vsm--mobile-bg {}
-.v-sidebar-menu .vsm--toggle-btn {}
+.v-sidebar-menu.vas_expanded {}
+.v-sidebar-menu.vas_collapsed {}
+.v-sidebar-menu.vas_rtl {}
+.v-sidebar-menu .vas--item {}
+.v-sidebar-menu .vas--item.vas--item_open {}
+.v-sidebar-menu .vas--link {}
+.v-sidebar-menu .vas--link.vas--link_active {}
+.v-sidebar-menu .vas--link.vas--link_exact-active {}
+.v-sidebar-menu .vas--link.vas--link_mobile-item {}
+.v-sidebar-menu .vas--link.vas--link_level-[n] {}
+.v-sidebar-menu .vas--link.vas--link_disabled {}
+.v-sidebar-menu .vas--title {}
+.v-sidebar-menu .vas--icon {}
+.v-sidebar-menu .vas--arrow {}
+.v-sidebar-menu .vas--arrow.vas--arrow_open {}
+.v-sidebar-menu .vas--badge {}
+.v-sidebar-menu .vas--header {}
+.v-sidebar-menu .vas--list {}
+.v-sidebar-menu .vas--dropdown>.vas--list {}
+.v-sidebar-menu .vas--mobile-item {}
+.v-sidebar-menu .vas--mobile-bg {}
+.v-sidebar-menu .vas--toggle-btn {}
 ```
 
 or you can override Sass variables (complete list of all variables can be found in `src/scss/_variables.scss`) and create your own theme

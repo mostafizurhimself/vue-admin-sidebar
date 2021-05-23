@@ -73,6 +73,8 @@ $dropdown-bg: #e3e3e3;
   }
 
   &.vsm_expanded {
+    max-width: var(--width);
+    transform: translateX(0);
     .vsm--item_open {
       .vsm--link {
         &_level-1 {

@@ -65,7 +65,7 @@ menu [
         /*
         badge: {
             text: 'new',
-            class: 'vsm--badge_default'
+            class: 'vas--badge_default'
             // attributes: {}
             // element: 'span'
         }

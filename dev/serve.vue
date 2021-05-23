@@ -1,14 +1,13 @@
 <script>
 import Vue from "vue";
-import VueAdminSidebar from "@/components/VueAdminSidebar";
+import VueAdminSidebar from "@/entry";
+Vue.use(VueAdminSidebar);
 
 export default Vue.extend({
     name: "ServeDev",
-    components: {
-        VueAdminSidebar,
-    },
     data() {
         return {
+            collapsed: false,
             menu: [
                 {
                     header: true,
@@ -61,7 +60,7 @@ export default Vue.extend({
                     icon: "fa fa-cog",
                     badge: {
                         text: "new",
-                        class: "vsm--badge_default",
+                        class: "vas--badge_default",
                     },
                 },
                 {
@@ -128,11 +127,49 @@ export default Vue.extend({
 
 <template>
     <div id="app">
-        <vue-admin-sidebar :menu="menu"></vue-admin-sidebar>
+        <vue-admin-sidebar :menu="menu" :relative="true" :collapsed="collapsed" :hideToggle="true"></vue-admin-sidebar>
         <div class="main">
-            <div class="header">
-                <button>Toggle Button</button>
+            <header class="header">
+                <button @click="collapsed = !collapsed">Toggle Button</button>
+            </header>
+            <div class="content-wrapper">
+                <router-view></router-view>
             </div>
         </div>
     </div>
 </template>
+
+<style lang="scss">
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#app {
+    height: 100vh;
+    display: flex;
+    font-family: "Nunito", "Helvetica", sans-serif;
+
+    .main {
+        flex-grow: 1;
+        height: 100vh;
+        overflow: hidden;
+
+        .header{
+            height: 60px;
+            background: whitesmoke;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            justify-content: flex-end;
+        }
+
+        .content-wrapper{
+            height: calc(100vh - 60px);
+            overflow: auto;
+            padding: 1rem;
+        }
+    }
+}
+</style>
