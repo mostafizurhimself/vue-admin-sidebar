@@ -1,3 +1,17 @@
+<template>
+    <div id="app">
+        <vue-admin-sidebar :menu="menu" :relative="true" :option="option" :hideToggle="true"></vue-admin-sidebar>
+        <div class="main">
+            <header class="header">
+                <button @click="option.collapsed = !option.collapsed">Toggle Button</button>
+            </header>
+            <div class="content-wrapper">
+                <router-view></router-view>
+            </div>
+        </div>
+    </div>
+</template>
+
 <script>
 import Vue from "vue";
 import VueAdminSidebar from "@/entry";
@@ -7,7 +21,11 @@ export default Vue.extend({
     name: "ServeDev",
     data() {
         return {
-            collapsed: false,
+            option: {
+                collapsed: false,
+                width: "350px",
+                widthCollapsed: "50px"
+            },
             menu: [
                 {
                     header: true,
@@ -124,20 +142,6 @@ export default Vue.extend({
     },
 });
 </script>
-
-<template>
-    <div id="app">
-        <vue-admin-sidebar :menu="menu" :relative="true" :collapsed="collapsed" :hideToggle="true"></vue-admin-sidebar>
-        <div class="main">
-            <header class="header">
-                <button @click="collapsed = !collapsed">Toggle Button</button>
-            </header>
-            <div class="content-wrapper">
-                <router-view></router-view>
-            </div>
-        </div>
-    </div>
-</template>
 
 <style lang="scss">
 * {

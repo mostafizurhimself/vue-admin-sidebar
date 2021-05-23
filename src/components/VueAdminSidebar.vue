@@ -2,21 +2,21 @@
     <div
         class="v-sidebar-menu"
         :class="sidebarClass"
-        :style="`--width:${this.width}; --widthCollapsed:${this.widthCollapsed}`"
+        :style="`--width:${option.width}; --widthCollapsed:${option.widthCollapsed}`"
         @mouseleave="onMouseLeave"
         @mouseenter="onMouseEnter"
     >
         <slot name="header" />
         <div
             class="vsm--scroll-wrapper"
-            :style="isCollapsed && [rtl ? {'margin-left': '-17px'} : {'margin-right': '-17px'}]"
+            :style="option.collapsed && [rtl ? {'margin-left': '-17px'} : {'margin-right': '-17px'}]"
         >
-            <div class="vsm--list" :style="isCollapsed && {'width': widthCollapsed}">
+            <div class="vsm--list" :style="option.collapsed && {'width': option.widthCollapsed}">
                 <sidebar-menu-item
                     v-for="(item, index) in menu"
                     :key="index"
                     :item="item"
-                    :is-collapsed="isCollapsed"
+                    :is-collapsed="option.collapsed"
                     :active-show="activeShow"
                     :show-one-child="showOneChild"
                     :show-child="showChild"
@@ -29,13 +29,13 @@
                     <slot slot="dropdown-icon" name="dropdown-icon" />
                 </sidebar-menu-item>
             </div>
-            <div v-if="isCollapsed" class="vsm--mobile-item" :style="mobileItemStyle.item">
+            <div v-if="option.collapsed" class="vsm--mobile-item" :style="mobileItemStyle.item">
                 <sidebar-menu-item
                     v-if="mobileItem"
                     :item="mobileItem"
                     :is-mobile-item="true"
                     :mobile-item-style="mobileItemStyle"
-                    :is-collapsed="isCollapsed"
+                    :is-collapsed="option.collapsed"
                     :show-child="showChild"
                     :rtl="rtl"
                     :disable-hover="disableHover"
@@ -76,18 +76,22 @@ export default {
             type: Array,
             required: true,
         },
-        collapsed: {
-            type: Boolean,
-            default: false,
+        option: {
+            type: Object,
+            required: true,
         },
-        width: {
-            type: String,
-            default: "350px",
-        },
-        widthCollapsed: {
-            type: String,
-            default: "50px",
-        },
+        // collapsed: {
+        //     type: Boolean,
+        //     default: false,
+        // },
+        // width: {
+        //     type: String,
+        //     default: "350px",
+        // },
+        // widthCollapsed: {
+        //     type: String,
+        //     default: "50px",
+        // },
         showChild: {
             type: Boolean,
             default: false,
@@ -119,8 +123,7 @@ export default {
     },
     data() {
         return {
-            windowWidth: null,
-            isCollapsed: this.collapsed,
+            // option.collapsed: this.collapsed,
             mobileItem: null,
             mobileItemPos: 0,
             mobileItemHeight: 0,
@@ -134,11 +137,11 @@ export default {
     },
     computed: {
         sidebarWidth() {
-            return this.isCollapsed ? this.widthCollapsed : this.width;
+            return this.option.collapsed ? this.option.widthCollapsed : this.option.width;
         },
         sidebarClass() {
             return [
-                !this.isCollapsed ? "vsm_expanded" : "vsm_collapsed",
+                !this.option.collapsed ? "vsm_expanded" : "vsm_collapsed",
                 this.theme ? `vsm_${this.theme}` : "",
                 this.rtl ? "vsm_rtl" : "",
                 // this.relative ? "vsm_relative" : "",
@@ -156,7 +159,7 @@ export default {
                     this.rtl && { direction: "rtl" },
                     { "z-index": 0 },
                     { width: `${this.parentWidth - this.parentOffsetLeft}px` },
-                    { "max-width": this.width },
+                    { "max-width": this.option.width },
                 ],
                 dropdown: [
                     { position: "absolute" },
@@ -185,28 +188,25 @@ export default {
     },
     watch: {
         collapsed(val) {
-            if (this.isCollapsed === this.collapsed) return;
-            this.isCollapsed = val;
+            if (this.option.collapsed === this.collapsed) return;
+            this.option.collapsed = val;
             this.mobileItem = null;
         },
-        windowWidth(val){
-          this.isCollapsed = this.windowWidth <= "992"
-        }
     },
     methods: {
         onMouseLeave() {
             this.unsetMobileItem(false, 300);
         },
         onMouseEnter() {
-            if (this.isCollapsed) {
+            if (this.option.collapsed) {
                 if (this.mobileItemTimeout)
                     clearTimeout(this.mobileItemTimeout);
             }
         },
         onToggleClick() {
-            this.isCollapsed = !this.isCollapsed;
+            this.option.collapsed = !this.option.collapsed;
             this.mobileItem = null;
-            this.$emit("toggle-collapse", this.isCollapsed);
+            this.$emit("toggle-collapse", this.option.collapsed);
         },
         onActiveShow(item) {
             this.activeShow = item;
@@ -282,12 +282,6 @@ export default {
             emitItemClick: this.onItemClick,
             emitItemUpdate: this.onItemUpdate,
         };
-    },
-    created() {
-        this.windowWidth = window.innerWidth;
-        window.addEventListener("resize", (e) => {
-            this.windowWidth = e.currentTarget.innerWidth;
-        });
     },
 };
 </script>
