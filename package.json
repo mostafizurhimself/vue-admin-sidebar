@@ -12,6 +12,10 @@
     "dist/*",
     "src/**/*.vue"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MdMostaFizurRahaman/vue-admin-sidebar.git"
+  },
   "keywords": [
     "vue",
     "vue-component",
