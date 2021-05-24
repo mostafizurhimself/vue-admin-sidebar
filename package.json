@@ -1,7 +1,9 @@
 {
   "name": "vue-admin-sidebar",
-  "version": "1.0.0",
-  "description": "",
+  "description": "A Vue.js admin sidbar component",
+  "version": "0.0.1",
+  "author": "Md MostaFizur Rahaman",
+  "license": "MIT",
   "main": "dist/vue-admin-sidebar.ssr.js",
   "browser": "dist/vue-admin-sidebar.esm.js",
   "module": "dist/vue-admin-sidebar.esm.js",
@@ -9,6 +11,15 @@
   "files": [
     "dist/*",
     "src/**/*.vue"
+  ],
+  "keywords": [
+    "vue",
+    "vue-component",
+    "vue-sidebar",
+    "vue-sidebar-component",
+    "vue-admin-sidebar",
+    "sidebar",
+    "admin-sidebar"
   ],
   "sideEffects": false,
   "scripts": {
