@@ -1,65 +1,67 @@
 <template>
-    <div
-        class="v-sidebar-menu"
-        :class="sidebarClass"
-        :style="`--width:${option.width}; --widthCollapsed:${option.widthCollapsed}`"
-        @mouseleave="onMouseLeave"
-        @mouseenter="onMouseEnter"
-    >
-        <slot name="header" />
+    <div>
         <div
-            class="vsm--scroll-wrapper"
-            :style="option.collapsed && [rtl ? {'margin-left': '-17px'} : {'margin-right': '-17px'}]"
-        >
-            <div class="vsm--list" :style="option.collapsed && {'width': option.widthCollapsed}">
-                <sidebar-menu-item
-                    v-for="(item, index) in menu"
-                    :key="index"
-                    :item="item"
-                    :is-collapsed="option.collapsed"
-                    :active-show="activeShow"
-                    :show-one-child="showOneChild"
-                    :show-child="showChild"
-                    :rtl="rtl"
-                    :mobile-item="mobileItem"
-                    :disable-hover="disableHover"
-                    @set-mobile-item="setMobileItem"
-                    @unset-mobile-item="unsetMobileItem"
-                >
-                    <slot slot="dropdown-icon" name="dropdown-icon" />
-                </sidebar-menu-item>
-            </div>
-            <div v-if="option.collapsed" class="vsm--mobile-item" :style="mobileItemStyle.item">
-                <sidebar-menu-item
-                    v-if="mobileItem"
-                    :item="mobileItem"
-                    :is-mobile-item="true"
-                    :mobile-item-style="mobileItemStyle"
-                    :is-collapsed="option.collapsed"
-                    :show-child="showChild"
-                    :rtl="rtl"
-                    :disable-hover="disableHover"
-                >
-                    <slot slot="dropdown-icon" name="dropdown-icon" />
-                </sidebar-menu-item>
-                <transition name="slide-animation">
-                    <div
+            class="v-sidebar-menu"
+            :class="sidebarClass"
+            :style="`--width:${width}; --widthCollapsed:${collapsed.width}`"
+            @mouseleave="onMouseLeave"
+            @mouseenter="onMouseEnter">
+            <slot name="header" />
+            <div
+                class="vsm--scroll-wrapper"
+                :style="collapsed.value && [rtl ? {'margin-left': '-17px'} : {'margin-right': '-17px'}]"
+            >
+                <div class="vsm--list" :style="collapsed.value && {'width': collapsed.width}">
+                    <sidebar-menu-item
+                        v-for="(item, index) in menu"
+                        :key="index"
+                        :item="item"
+                        :is-collapsed="collapsed.value"
+                        :active-show="activeShow"
+                        :show-one-child="showOneChild"
+                        :show-child="showChild"
+                        :rtl="rtl"
+                        :mobile-item="mobileItem"
+                        :disable-hover="disableHover"
+                        @set-mobile-item="setMobileItem"
+                        @unset-mobile-item="unsetMobileItem"
+                    >
+                        <slot slot="dropdown-icon" name="dropdown-icon" />
+                    </sidebar-menu-item>
+                </div>
+                <div v-if="collapsed.value" class="vsm--mobile-item" :style="mobileItemStyle.item">
+                    <sidebar-menu-item
                         v-if="mobileItem"
-                        class="vsm--mobile-bg"
-                        :style="mobileItemStyle.background"
-                    />
-                </transition>
+                        :item="mobileItem"
+                        :is-mobile-item="true"
+                        :mobile-item-style="mobileItemStyle"
+                        :is-collapsed="collapsed.value"
+                        :show-child="showChild"
+                        :rtl="rtl"
+                        :disable-hover="disableHover"
+                    >
+                        <slot slot="dropdown-icon" name="dropdown-icon" />
+                    </sidebar-menu-item>
+                    <transition name="slide-animation">
+                        <div
+                            v-if="mobileItem"
+                            class="vsm--mobile-bg"
+                            :style="mobileItemStyle.background"
+                        />
+                    </transition>
+                </div>
             </div>
+            <slot name="footer" />
+            <button
+                v-if="!hideToggle"
+                class="vsm--toggle-btn"
+                :class="{'vsm--toggle-btn_slot' : $slots['toggle-icon']}"
+                @click="onToggleClick"
+            >
+                <slot name="toggle-icon" />
+            </button>
         </div>
-        <slot name="footer" />
-        <button
-            v-if="!hideToggle"
-            class="vsm--toggle-btn"
-            :class="{'vsm--toggle-btn_slot' : $slots['toggle-icon']}"
-            @click="onToggleClick"
-        >
-            <slot name="toggle-icon" />
-        </button>
+        <div class="v-overlay" @click="onToggleClick"></div>
     </div>
 </template>
 
@@ -76,18 +78,19 @@ export default {
             type: Array,
             required: true,
         },
-        option: {
+        // option: {
+        //     type: Object,
+        //     required: true,
+        //     // validator: (opt) => optionKeys.every((key) => key in opt),
+        // },
+        collapsed: {
             type: Object,
-            required: true,
+            default: () => ({ value: false, width: "50px" }),
         },
-        // collapsed: {
-        //     type: Boolean,
-        //     default: false,
-        // },
-        // width: {
-        //     type: String,
-        //     default: "350px",
-        // },
+        width: {
+            type: String,
+            default: "350px",
+        },
         // widthCollapsed: {
         //     type: String,
         //     default: "50px",
@@ -102,7 +105,7 @@ export default {
         },
         showOneChild: {
             type: Boolean,
-            default: false,
+            default: true,
         },
         rtl: {
             type: Boolean,
@@ -123,7 +126,7 @@ export default {
     },
     data() {
         return {
-            // option.collapsed: this.collapsed,
+            // collapsed.value: this.collapsed,
             mobileItem: null,
             mobileItemPos: 0,
             mobileItemHeight: 0,
@@ -137,11 +140,11 @@ export default {
     },
     computed: {
         sidebarWidth() {
-            return this.option.collapsed ? this.option.widthCollapsed : this.option.width;
+            return this.collapsed.value ? this.collapsed.width : this.width;
         },
         sidebarClass() {
             return [
-                !this.option.collapsed ? "vsm_expanded" : "vsm_collapsed",
+                !this.collapsed.value ? "vsm_expanded" : "vsm_collapsed",
                 this.theme ? `vsm_${this.theme}` : "",
                 this.rtl ? "vsm_rtl" : "",
                 // this.relative ? "vsm_relative" : "",
@@ -159,7 +162,7 @@ export default {
                     this.rtl && { direction: "rtl" },
                     { "z-index": 0 },
                     { width: `${this.parentWidth - this.parentOffsetLeft}px` },
-                    { "max-width": this.option.width },
+                    { "max-width": this.width },
                 ],
                 dropdown: [
                     { position: "absolute" },
@@ -187,26 +190,26 @@ export default {
         },
     },
     watch: {
-        collapsed(val) {
-            if (this.option.collapsed === this.collapsed) return;
-            this.option.collapsed = val;
-            this.mobileItem = null;
-        },
+        // collapsed(val) {
+        //     if (this.collapsed.value === this.collapsed) return;
+        //     this.collapsed.value = val;
+        //     this.mobileItem = null;
+        // },
     },
     methods: {
         onMouseLeave() {
             this.unsetMobileItem(false, 300);
         },
         onMouseEnter() {
-            if (this.option.collapsed) {
+            if (this.collapsed.value) {
                 if (this.mobileItemTimeout)
                     clearTimeout(this.mobileItemTimeout);
             }
         },
         onToggleClick() {
-            this.option.collapsed = !this.option.collapsed;
+            this.collapsed.value = !this.collapsed.value;
             this.mobileItem = null;
-            this.$emit("toggle-collapse", this.option.collapsed);
+            this.$emit("toggle-collapse", this.collapsed.value);
         },
         onActiveShow(item) {
             this.activeShow = item;

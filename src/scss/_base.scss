@@ -12,6 +12,7 @@
   z-index: 999;
   box-sizing: border-box;
   width: 100%;
+  height: 100vh;
   text-align: left;
   transition: 0.3s all ease;
 
@@ -143,13 +144,14 @@
   }
 
   &.vsm_collapsed {
-    max-width: var(--widthCollapsed);
+    min-width: var(--widthCollapsed);
+    width: var(--widthCollapsed);
 
     @media (max-width: 992px) {
       max-width: var(--width);
       transform: translateX(-100%);
     }
-
+    
     & .vsm--link_level-1 {
 
       &.vsm--link_hover,

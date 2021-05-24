@@ -1,9 +1,9 @@
 <template>
     <div id="app">
-        <vue-admin-sidebar :menu="menu" :relative="true" :option="option" :hideToggle="true"></vue-admin-sidebar>
+        <vue-admin-sidebar :menu="menu" :relative="true" :collapsed="collapsed" :hideToggle="true"></vue-admin-sidebar>
         <div class="main">
             <header class="header">
-                <button @click="option.collapsed = !option.collapsed">Toggle Button</button>
+                <button @click="collapsed.value = !collapsed.value">Toggle Button</button>
             </header>
             <div class="content-wrapper">
                 <router-view></router-view>
@@ -21,10 +21,9 @@ export default Vue.extend({
     name: "ServeDev",
     data() {
         return {
-            option: {
-                collapsed: false,
-                width: "350px",
-                widthCollapsed: "50px"
+            collapsed: {
+                value: false,
+                width: "50px",
             },
             menu: [
                 {
@@ -160,7 +159,7 @@ export default Vue.extend({
         height: 100vh;
         overflow: hidden;
 
-        .header{
+        .header {
             height: 60px;
             background: whitesmoke;
             display: flex;
@@ -169,7 +168,7 @@ export default Vue.extend({
             justify-content: flex-end;
         }
 
-        .content-wrapper{
+        .content-wrapper {
             height: calc(100vh - 60px);
             overflow: auto;
             padding: 1rem;

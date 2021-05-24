@@ -1,32 +1,41 @@
 .v-sidebar-menu {
   background-color: $base-bg;
+
   .vsm--link {
     color: $item-color;
+
     &_exact-active,
     &_active {
       color: $item-active-color;
       background-color: $item-active-bg;
     }
+
     &_level-1 {
+
       &.vsm--link_exact-active,
       &.vsm--link_active {
         box-shadow: 3px 0px 0px 0px $primary-color inset;
+
         & .vsm--icon {
           color: $icon-active-color;
           background-color: $icon-active-bg;
         }
       }
+
       & .vsm--icon {
         background-color: $icon-bg;
       }
     }
+
     &_hover,
     &:hover {
       color: $item-hover-color;
       background-color: $item-hover-bg;
     }
+
     &_mobile-item {
       color: $mobile-item-color;
+
       &.vsm--link_hover,
       &:hover {
         color: $mobile-item-color;
@@ -35,6 +44,7 @@
   }
 
   &.vsm_collapsed {
+
     .vsm--link_level-1.vsm--link_hover,
     .vsm--link_level-1:hover {
       .vsm--icon {
@@ -52,9 +62,11 @@
     & .vsm--list {
       background-color: $dropdown-bg;
     }
+
     & .vsm--link {
       color: $dropdown-color;
     }
+
     & .vsm--icon {
       color: $dropdown-color;
     }
@@ -65,13 +77,25 @@
   }
 
   &.vsm_expanded {
-    max-width: var(--width);
+    min-width: var(--width);
+    width: var(--width);
     transform: translateX(0);
+
+    &+.v-overlay {
+      @media (max-width: 992px) {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+    }
+
     .vsm--item_open {
       .vsm--link {
         &_level-1 {
           color: $item-open-color;
           background-color: $item-open-bg;
+
           & .vsm--icon {
             color: $icon-open-color;
             background-color: $icon-open-bg;
@@ -82,6 +106,7 @@
   }
 
   &.vsm_rtl {
+
     .vsm--link_level-1.vsm--link_active,
     .vsm--link_level-1.vsm--link_exact-active {
       box-shadow: -3px 0px 0px 0px $primary-color inset;
@@ -91,12 +116,14 @@
   .vsm--header {
     color: rgba($item-color, 0.7);
   }
+
   .vsm--badge_default {
     color: $item-color;
-    background-color: darken( $base-bg, 5% );
+    background-color: darken($base-bg, 5%);
   }
+
   .vsm--toggle-btn {
     color: $item-color;
-    background-color: darken( $base-bg, 5% );
+    background-color: darken($base-bg, 5%);
   }
 }
