@@ -1,7 +1,7 @@
 {
   "name": "vue-admin-sidebar",
   "description": "A Vue.js admin sidbar component",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Md MostaFizur Rahaman",
   "license": "MIT",
   "main": "dist/vue-admin-sidebar.ssr.js",

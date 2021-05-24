@@ -1,17 +1,11 @@
-# vue-sidebar-menu
+# vue-admin-sidebar
 
-A Vue.js Sidebar Menu Component
-
-## Demo
-
-[vue-sidebar-menu-demo](https://yaminncco.github.io/vue-sidebar-menu/)
-
-### This documentation is for Vue 2, for Vue 3 you can try the prerelease see [here](https://github.com/yaminncco/vue-sidebar-menu/tree/next)
+A Vue.js admin sidbar component
 
 ## Installation
 
 ```
-npm i vue-sidebar-menu --save
+npm i vue-admin-sidebar
 ```
 
 Install the plugin globally.
@@ -19,19 +13,19 @@ Install the plugin globally.
 ```js
 //main.js
 import Vue from 'vue'
-import VueSidebarMenu from 'vue-sidebar-menu'
-import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
-Vue.use(VueSidebarMenu)
+import VueAdminSidebar from 'vue-admin-sidebar'
+import 'vue-admin-sidebar/dist/vue-admin-sidebar.css'
+Vue.use(VueAdminSidebar)
 ```
 
 Or import the component locally.
 
 ```js
 //App.vue
-import { SidebarMenu } from 'vue-sidebar-menu'
+import { VueAdminSidebar } from 'vue-admin-sidebar'
 export default {
   components: {
-    SidebarMenu
+    VueAdminSidebar
   }
 }
 ```
@@ -40,7 +34,7 @@ export default {
 
 ```html
 <template>
-  <sidebar-menu :menu="menu" />
+  <vue-admin-sidebar :menu="menu" />
 </template>
 
 <script>
@@ -59,12 +53,12 @@ export default {
                         icon: 'fa fa-user'
                     },
                     {
-                        href: '/charts',
-                        title: 'Charts',
-                        icon: 'fa fa-chart-area',
+                        href: '/users',
+                        title: 'User',
+                        icon: 'fa fa-user',
                         child: [
                             {
-                                href: '/charts/sublink',
+                                href: '/users/sublink',
                                 title: 'Sub Link'
                             }
                         ]
@@ -155,22 +149,16 @@ props: {
       required: true
     },
 
-    // Sidebar Collapse state
+    // Sidebar Collapse state and width
     collapsed: {
-      type: Boolean,
-      default: false
+        type: Object,
+        default: () => ({ value: false, width: "50px" }),
     },
 
     // Sidebar width (expanded)
     width: {
       type: String,
       default: '350px'
-    },
-
-    // Sidebar width (collapsed)
-    widthCollapsed: {
-      type: String,
-      default: '50px'
     },
 
     // Keep only one child opened at a time (first level only)
@@ -187,12 +175,6 @@ props: {
 
     // Sidebar right to left
     rtl: {
-      type: Boolean,
-      default: false
-    },
-
-    // Make sidebar relative to the parent (by default the sidebar is relative to the viewport)
-    relative: {
       type: Boolean,
       default: false
     },
@@ -267,7 +249,7 @@ or you can override Sass variables (complete list of all variables can be found 
 
 ```scss
 @import "custom-var.scss";
-@import "vue-sidebar-menu/src/scss/vue-sidebar-menu.scss";
+@import "vue-admin-sidebar/src/scss/vue-admin-sidebar.scss";
 ```
 
 ### Customize Toggle & Dropdown Icons
@@ -285,9 +267,7 @@ The component use `Font Awesome 5 Free` as default, but you can either customize
 </sidebar-menu>
 ```
 
-## Development
+# Credits
 
-```
-npm install
-npm run dev
-```
+* [vue-sidebar-menu](https://github.com/yaminncco/vue-sidebar-menu.git)
+
