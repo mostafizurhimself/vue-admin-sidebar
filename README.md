@@ -14,7 +14,6 @@ Install the plugin globally.
 //main.js
 import Vue from 'vue'
 import VueAdminSidebar from 'vue-admin-sidebar'
-import 'vue-admin-sidebar/dist/vue-admin-sidebar.css'
 Vue.use(VueAdminSidebar)
 ```
 
