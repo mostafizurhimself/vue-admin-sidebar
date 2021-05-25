@@ -7,7 +7,9 @@ $item-hover-bg: rgba(darken($base-bg, 5%), 0.5);
 $dropdown-bg: #e3e3e3;
 
 .v-sidebar-menu.vsm_white-theme {
-  background-color: $base-bg;
+  &.vsm--background {
+    background-color: $base-bg;
+  }
 
   .vsm--link {
     color: $item-color;

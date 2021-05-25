@@ -5,7 +5,8 @@
             :class="sidebarClass"
             :style="`--width:${width}; --widthCollapsed:${collapsed.width}`"
             @mouseleave="onMouseLeave"
-            @mouseenter="onMouseEnter">
+            @mouseenter="onMouseEnter"
+        >
             <slot name="header" />
             <div
                 class="vsm--scroll-wrapper"
@@ -78,11 +79,6 @@ export default {
             type: Array,
             required: true,
         },
-        // option: {
-        //     type: Object,
-        //     required: true,
-        //     // validator: (opt) => optionKeys.every((key) => key in opt),
-        // },
         collapsed: {
             type: Object,
             default: () => ({ value: false, width: "50px" }),
@@ -91,10 +87,6 @@ export default {
             type: String,
             default: "350px",
         },
-        // widthCollapsed: {
-        //     type: String,
-        //     default: "50px",
-        // },
         showChild: {
             type: Boolean,
             default: false,
@@ -111,10 +103,6 @@ export default {
             type: Boolean,
             default: false,
         },
-        // relative: {
-        //     type: Boolean,
-        //     default: false,
-        // },
         hideToggle: {
             type: Boolean,
             default: false,
@@ -123,10 +111,15 @@ export default {
             type: Boolean,
             default: false,
         },
+
+        // Classes
+        sidebarClasses: {
+            type: String,
+            default: 'vsm--background'
+        }
     },
     data() {
         return {
-            // collapsed.value: this.collapsed,
             mobileItem: null,
             mobileItemPos: 0,
             mobileItemHeight: 0,
@@ -147,6 +140,7 @@ export default {
                 !this.collapsed.value ? "vsm_expanded" : "vsm_collapsed",
                 this.theme ? `vsm_${this.theme}` : "",
                 this.rtl ? "vsm_rtl" : "",
+                this.sidebarClasses
                 // this.relative ? "vsm_relative" : "",
             ];
         },
@@ -188,13 +182,6 @@ export default {
                 ],
             };
         },
-    },
-    watch: {
-        // collapsed(val) {
-        //     if (this.collapsed.value === this.collapsed) return;
-        //     this.collapsed.value = val;
-        //     this.mobileItem = null;
-        // },
     },
     methods: {
         onMouseLeave() {
@@ -278,6 +265,21 @@ export default {
                 this.activeShow = newItem;
             }
         },
+
+        onResize() {
+            if (window.innerWidth <= 992) {
+                // this.isOnMobile = true;
+                this.collapsed.value = true;
+            } 
+            else {
+                // this.isOnMobile = false;
+                this.collapsed.value = false;
+            }
+        },
+    },
+    mounted() {
+        this.onResize();
+        window.addEventListener("resize", this.onResize);
     },
     provide() {
         return {

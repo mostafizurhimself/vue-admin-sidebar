@@ -1,5 +1,7 @@
 .v-sidebar-menu {
-  background-color: $base-bg;
+  &.vsm--background{
+    background-color: $base-bg;
+  }
 
   .vsm--link {
     color: $item-color;
