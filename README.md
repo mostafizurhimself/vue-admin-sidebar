@@ -196,7 +196,7 @@ props: {
       default: false
     }
 
-    // Set additional classes to sidebar
+    // Set additional classes to sidebar`
     sidebarClasses: {
           type: String,
           default: 'vsm--background'
