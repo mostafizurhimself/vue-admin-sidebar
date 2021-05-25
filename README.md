@@ -98,7 +98,7 @@ menu [
         /*
         badge: {
             text: 'new',
-            class: 'vas--badge_default'
+            class: 'vsm--badge_default'
             // attributes: {}
             // element: 'span'
         }
@@ -235,7 +235,7 @@ All styles customization can be done in normal CSS by using this classes
 .v-sidebar-menu .vas--icon {}
 .v-sidebar-menu .vas--arrow {}
 .v-sidebar-menu .vas--arrow.vas--arrow_open {}
-.v-sidebar-menu .vas--badge {}
+.v-sidebar-menu .vsm--badge {}
 .v-sidebar-menu .vas--header {}
 .v-sidebar-menu .vas--list {}
 .v-sidebar-menu .vas--dropdown>.vas--list {}

@@ -77,7 +77,7 @@ export default Vue.extend({
                     icon: "fa fa-cog",
                     badge: {
                         text: "new",
-                        class: "vas--badge_default",
+                        class: "vsm--badge_default",
                     },
                 },
                 {

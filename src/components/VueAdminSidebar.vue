@@ -268,13 +268,12 @@ export default {
 
         onResize() {
             if (window.innerWidth <= 992) {
-                // this.isOnMobile = true;
                 this.collapsed.value = true;
             } 
-            else {
-                // this.isOnMobile = false;
-                this.collapsed.value = false;
-            }
+            // else {
+            //     // this.isOnMobile = false;
+            //     this.collapsed.value = false;
+            // }
         },
     },
     mounted() {

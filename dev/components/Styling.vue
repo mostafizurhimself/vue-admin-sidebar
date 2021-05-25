@@ -18,7 +18,7 @@
 .v-sidebar-menu .vas--icon {}
 .v-sidebar-menu .vas--arrow {}
 .v-sidebar-menu .vas--arrow.vas--arrow_open {}
-.v-sidebar-menu .vas--badge {}
+.v-sidebar-menu .vsm--badge {}
 .v-sidebar-menu .vas--header {}
 .v-sidebar-menu .vas--list {}
 .v-sidebar-menu .vas--dropdown>.vas--list {}
